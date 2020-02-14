@@ -9,18 +9,29 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    let formatter = NumberFormatter()
 
+    @IBOutlet weak var height: UILabel!
+    @IBOutlet weak var weight: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
 
     @IBAction func heightUpdated(_ sender: UISlider) {
-        print(sender.value)
+        height.text = "\(roundTo(value: sender.value, style: .decimal, fractional: 2)) m"
     }
     
     @IBAction func weightUpdated(_ sender: UISlider) {
-        print(sender.value)
+        weight.text = "\(roundTo(value: sender.value, style: .none, fractional: 0)) kg"
+    }
+    
+    func roundTo(value: Float, style: NumberFormatter.Style, fractional: Int) -> String {
+        formatter.numberStyle = style
+        formatter.maximumFractionDigits = fractional
+        return formatter.string(from: NSNumber(value: value))!
     }
 }
 
