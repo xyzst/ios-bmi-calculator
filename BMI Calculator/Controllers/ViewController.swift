@@ -14,10 +14,11 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var height: UILabel!
     @IBOutlet weak var weight: UILabel!
+    @IBOutlet weak var currentHeight: UISlider!
+    @IBOutlet weak var currentWeight: UISlider!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
 
     @IBAction func heightUpdated(_ sender: UISlider) {
@@ -26,6 +27,17 @@ class ViewController: UIViewController {
     
     @IBAction func weightUpdated(_ sender: UISlider) {
         weight.text = "\(roundTo(value: sender.value, style: .none, fractional: 0)) kg"
+    }
+    
+    
+    
+    @IBAction func calculateBMI(_ sender: UIButton) {
+        let h = currentHeight.value
+        let w = currentWeight.value
+        
+        let bmi = w / powf(h, 2)
+        
+        print(bmi)
     }
     
     func roundTo(value: Float, style: NumberFormatter.Style, fractional: Int) -> String {
