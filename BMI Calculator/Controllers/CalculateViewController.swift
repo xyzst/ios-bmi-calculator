@@ -10,7 +10,7 @@ import UIKit
 
 class CalculateViewController: UIViewController {
     
-    let bmiModel = BodyMassIndexModel()
+    var bmiModel = BodyMassIndexModel()
     
     let formatter = NumberFormatter()
 
@@ -45,7 +45,6 @@ class CalculateViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
-        
         if segue.identifier == "transitionToResult" {
             let destination = segue.destination as! ResultViewController
             let h = currentHeight.value

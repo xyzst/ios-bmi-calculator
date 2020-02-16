@@ -12,7 +12,7 @@ import UIKit
 
 class ResultViewController: UIViewController {
     
-    var bmi: Float = 0.0
+    var bmi: BMI?
 
     @IBOutlet weak var bodyMassIndexLabel: UILabel!
     @IBOutlet weak var suggestedAdviceLabel: UILabel!
@@ -20,7 +20,9 @@ class ResultViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        bodyMassIndexLabel.text = String(format: "%.2f", bmi)
+        bodyMassIndexLabel.text = String(format: "%.2f", bmi!.value)
+        suggestedAdviceLabel.text = bmi!.advice
+        view.backgroundColor = bmi!.color
     }
     
     @IBAction func recalculate(_ sender: UIButton) {
