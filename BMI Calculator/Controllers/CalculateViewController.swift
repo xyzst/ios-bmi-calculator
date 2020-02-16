@@ -10,6 +10,8 @@ import UIKit
 
 class CalculateViewController: UIViewController {
     
+    let bmiModel = BodyMassIndexModel()
+    
     let formatter = NumberFormatter()
 
     @IBOutlet weak var height: UILabel!
@@ -48,7 +50,7 @@ class CalculateViewController: UIViewController {
             let destination = segue.destination as! ResultViewController
             let h = currentHeight.value
             let w = currentWeight.value
-            destination.bmi = w / powf(h, 2)
+            destination.bmi = bmiModel.calculate(height: h, weight: w)
         }
     }
     

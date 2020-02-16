@@ -24,6 +24,10 @@ class ResultViewController: UIViewController {
     }
     
     @IBAction func recalculate(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: {
+            () -> Void in
+            print("dismissed!")
+        })
     }
 
 }
