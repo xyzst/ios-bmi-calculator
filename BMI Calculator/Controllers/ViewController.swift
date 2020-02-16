@@ -37,7 +37,11 @@ class ViewController: UIViewController {
         
         let bmi = w / powf(h, 2)
         
-        print(bmi)
+//        Programmatically transition to another view
+        let transitionTo = SecondViewController()
+        transitionTo.BMI = bmi
+
+        self.present(transitionTo, animated: true, completion: nil)
     }
     
     func roundTo(value: Float, style: NumberFormatter.Style, fractional: Int) -> String {
