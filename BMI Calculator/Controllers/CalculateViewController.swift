@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class CalculateViewController: UIViewController {
     
     let formatter = NumberFormatter()
 
@@ -30,19 +30,29 @@ class ViewController: UIViewController {
     }
     
     
-    
     @IBAction func calculateBMI(_ sender: UIButton) {
-        let h = currentHeight.value
-        let w = currentWeight.value
-        
-        let bmi = w / powf(h, 2)
-        
-//        Programmatically transition to another view
-        let transitionTo = SecondViewController()
-        transitionTo.BMI = bmi
-
-        self.present(transitionTo, animated: true, completion: nil)
+        // To create segue, need to:
+        // 1) In storyboard, create 'segue' from one storyboard to another. In this case, CalculateViewControlle to ResultViewController
+        // 2) In storyboard, give the newly created segue an identifier (click storyboard segue element, go to identifier tab)
+        // 3) In the view to segue from, reference the identifier in the self.performSegue() method
+        self.performSegue(withIdentifier: "transitionToResult", sender: self)
     }
+    
+    // MARK: - Navigation
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "transitionToResult" {
+            let destination = segue.destination as! ResultViewController
+            let h = currentHeight.value
+            let w = currentWeight.value
+            destination.bmi = w / powf(h, 2)
+        }
+    }
+    
+    // MARK: - Utility
     
     func roundTo(value: Float, style: NumberFormatter.Style, fractional: Int) -> String {
         formatter.numberStyle = style
